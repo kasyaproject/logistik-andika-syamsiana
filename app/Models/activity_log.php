@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class activity_log extends Model
 {
@@ -12,6 +13,7 @@ class activity_log extends Model
     protected $keyType = 'string';  // Mengatur tipe key menjadi string (UUID)
 
     protected $fillable = [
+        'id',
         'product_id',
         'activity_type',
         'quantity',

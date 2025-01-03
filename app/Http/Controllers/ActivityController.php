@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\activity_log;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -14,6 +15,12 @@ class ActivityController extends Controller
         $product = activity_log::all();
         // dump($product);
         return view('pages.ProductInPage.index', compact('productIn'));
+    }
+    public function ProductInDestroy(Product $product)
+    {
+        activity_log::destroy($product->id);
+
+        return redirect()->route('product.ProductIn');
     }
 
     public function ProductOut()
