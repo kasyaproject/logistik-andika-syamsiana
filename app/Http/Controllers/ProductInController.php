@@ -12,7 +12,7 @@ class ProductInController extends Controller
     //
     public function index()
     {
-        $productIn = activity_log::where('activity_type', 'masuk')->paginate(10);
+        $productIn = activity_log::where('activity_type', 'masuk')->orderBy("created_at", "desc")->paginate(10);
         // dump($product);
 
         return view('pages.ProductInPage.index', compact('productIn'));

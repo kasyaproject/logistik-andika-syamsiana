@@ -32,10 +32,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/product-out', [ProductOutController::class, 'index'])->name('productOut.index');
     Route::get('/product-out/create', [ProductOutController::class, 'create'])->name('productOut.create');
-    // Route::post('/product-out', [ProductOutController::class, 'store'])->name('productOut.store');
-    // Route::get('/product-out/{productOut}/edit', [ProductOutController::class, 'edit'])->name('productOut.edit');
-    // Route::patch('/product-out/{productOut}', [ProductOutController::class, 'update'])->name('productOut.update');
-    // Route::delete('/product-out/{productOut}', [ProductOutController::class, 'destroy'])->name('productOut.destroy');
+    Route::post('/product-out', [ProductOutController::class, 'store'])->name('productOut.store');
+    Route::get('/product-out/{productOut}/edit', [ProductOutController::class, 'edit'])->name('productOut.edit');
+    Route::patch('/product-out/{productOut}', [ProductOutController::class, 'update'])->name('productOut.update');
+    Route::delete('/product-out/{productOut}', [ProductOutController::class, 'destroy'])->name('productOut.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

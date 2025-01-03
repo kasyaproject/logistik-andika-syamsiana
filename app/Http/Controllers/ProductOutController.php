@@ -12,7 +12,7 @@ class ProductOutController extends Controller
     //
     public function index()
     {
-        $productOut = activity_log::where('activity_type', 'keluar')->paginate(10);
+        $productOut = activity_log::where('activity_type', 'keluar')->orderBy("created_at", "desc")->paginate(10);
         // dump($productOut);
         return view('pages.ProductOutPage.index', compact('productOut'));
     }
@@ -30,15 +30,15 @@ class ProductOutController extends Controller
         $request->validate([
             'product_id' => 'required|numeric',
             'qty' => 'required|numeric',
-            'origin' => 'required|string',
+            'destination' => 'required|string',
         ]);
 
         activity_log::create([
             'id' => (string) Str::uuid(),
             'product_id' => $request->product_id,
             'quantity' => $request->qty,
-            'origin' => $request->origin,
-            'activity_type' => 'masuk',
+            'origin' => $request->destination,
+            'activity_type' => 'keluar',
         ]);
 
         return redirect()->route('productOut.index');

@@ -10,7 +10,7 @@ class ProductController extends Controller
     //
     public function index()
     {
-        $product = Product::paginate(10);
+        $product = Product::orderBy("created_at", "desc")->paginate(10);
         // dump($product);
 
         return view('pages.ProductPage.index', compact('product'));
