@@ -14,63 +14,30 @@ class ActivityProductSeeder extends Seeder
     public function run(): void
     {
         // Menambahkan log aktivitas barang masuk
-        $data = [
-            [
-                'id' => (string) Str::uuid(), // Menggunakan UUID
-                'product_id' => 1, // Menggunakan id produk yang diambil
-                'activity_type' => 'masuk', // Aktivitas masuk
-                'quantity' => 100, // Jumlah barang yang masuk
-                'origin' => 'Supplier A', // Asal barang
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'id' => (string) Str::uuid(), // Menggunakan UUID
-                'product_id' => 1, // Menggunakan id produk yang sama
-                'activity_type' => 'keluar', // Aktivitas keluar
-                'quantity' => 50, // Jumlah barang yang keluar
-                'origin' => 'Retailer B', // Asal barang
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
+        $data = [];
+        for ($i = 1; $i <= 15; $i++) {
+            // Data masuk
+            $data[] = [
                 'id' => (string) Str::uuid(),
-                'product_id' => 2, // ID produk 2
+                'product_id' => rand(1, 10), // ID produk sesuai iterasi
                 'activity_type' => 'masuk',
-                'quantity' => 150,
-                'origin' => 'Supplier B',
+                'quantity' => rand(50, 200), // Jumlah barang acak antara 50-200
+                'origin' => 'Supplier ' . chr(64 + $i), // Asal barang dengan huruf abjad
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'id' => (string) Str::uuid(),
-                'product_id' => 2, // ID produk 2
-                'activity_type' => 'keluar',
-                'quantity' => 80,
-                'origin' => 'Retailer C',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'id' => (string) Str::uuid(),
-                'product_id' => 3, // ID produk 3
-                'activity_type' => 'masuk',
-                'quantity' => 200,
-                'origin' => 'Supplier C',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'id' => (string) Str::uuid(),
-                'product_id' => 3, // ID produk 3
-                'activity_type' => 'keluar',
-                'quantity' => 100,
-                'origin' => 'Retailer D',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ];
+            ];
 
+            // Data keluar
+            $data[] = [
+                'id' => (string) Str::uuid(),
+                'product_id' => rand(1, 10), // ID produk sesuai iterasi
+                'activity_type' => 'keluar',
+                'quantity' => rand(20, 100), // Jumlah barang acak antara 20-100
+                'origin' => 'Retailer ' . chr(64 + $i), // Asal barang dengan huruf abjad
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
 
         activity_log::insert($data);
     }
