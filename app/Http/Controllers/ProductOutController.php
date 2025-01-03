@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\activity_log;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ProductOutController extends Controller
@@ -27,11 +28,18 @@ class ProductOutController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'product_id' => 'required|numeric',
             'qty' => 'required|numeric',
             'destination' => 'required|string',
         ]);
+
+        if ($validator->fails()) {
+            // You can customize the error message display here
+            drakify('error', 'Failed to add new Product Outcome');
+
+            return redirect()->route('productOut.index')->withErrors($validator)->withInput();
+        }
 
         activity_log::create([
             'id' => (string) Str::uuid(),
@@ -40,6 +48,8 @@ class ProductOutController extends Controller
             'origin' => $request->destination,
             'activity_type' => 'keluar',
         ]);
+
+        drakify('success', 'New Product Outcome has been added');
 
         return redirect()->route('productOut.index');
     }
@@ -59,19 +69,24 @@ class ProductOutController extends Controller
         $request->validate([
             'product_id' => 'required|numeric',
             'qty' => 'required|numeric',
-            'origin' => 'required|string',
+            'destination' => 'required|string',
         ]);
         activity_log::where('id', $productOut->id)->update([
             'product_id' => $request->product_id,
             'quantity' => $request->qty,
-            'origin' => $request->origin,
+            'origin' => $request->destination,
         ]);
+
+        smilify('success', 'Product Outcome has been updated');
+
         return redirect()->route('productOut.index');
     }
 
     public function destroy(activity_log $productOut)
     {
         activity_log::destroy($productOut->id);
+
+        smilify('success', 'Product Outcome has been deleted');
 
         return redirect()->route('productOut.index');
     }

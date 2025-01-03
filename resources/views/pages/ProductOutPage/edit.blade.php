@@ -13,10 +13,10 @@
 
             {{-- Form --}}
             <div class="relative p-6 mt-6 overflow-x-auto bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
-                <p class="mb-6 font-semibold dark:text-white">This form is used to record new incoming goods into the
+                <p class="mb-6 font-semibold dark:text-white">This form is used to record new outgoing goods from the
                     system.
-                    Please provide complete and accurate details to ensure the goods are properly tracked and managed.
-                    Below is an explanation for each field that needs to be filled out</p>
+                    Please provide complete and accurate details to ensure the goods are properly tracked and managed
+                    when they leave the system. Below is an explanation for each field that needs to be filled out.</p>
 
                 <form action="{{ route('productOut.update', $productOut->id) }}" method="POST" class="max-w-7xl sm:mx-10">
                     @csrf
@@ -38,23 +38,24 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="mb-5">
-                            <label for="origin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Origin of Items
+                            <label for="destination"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Destination of Items
                             </label>
-                            <select id="origin" name="origin"
+                            <select id="destination" name="destination"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                <option value="Supplier A" @if ($productOut->origin == 'Supplier A') selected @endif>
-                                    Supplier A
+                                <option value="Retailer A" @if ($productOut->origin == 'Retailer A') selected @endif>
+                                    Retailer A
                                 </option>
-                                <option value="Supplier B" @if ($productOut->origin == 'Supplier B') selected @endif>
-                                    Supplier B
+                                <option value="Retailer B" @if ($productOut->origin == 'Retailer B') selected @endif>
+                                    Retailer B
                                 </option>
-                                <option value="Supplier C" @if ($productOut->origin == 'Supplier C') selected @endif>
-                                    Supplier C
+                                <option value="Retailer C" @if ($productOut->origin == 'Retailer C') selected @endif>
+                                    Retailer C
                                 </option>
-                                <option value="Supplier D" @if ($productOut->origin == 'Supplier D') selected @endif>
-                                    Supplier D
+                                <option value="Retailer D" @if ($productOut->origin == 'Retailer D') selected @endif>
+                                    Retailer D
                                 </option>
 
                             </select>

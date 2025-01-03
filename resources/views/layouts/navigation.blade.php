@@ -1,12 +1,12 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="w-full px-4 mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Hamburger Sidebar -->
                 <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar"
                     aria-controls="default-sidebar" type="button"
-                    class="inline-flex items-center px-3 py-1 text-sm font-medium text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md sm:hidden dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none">
+                    class="inline-flex items-center px-3 py-1 text-sm font-medium text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md md:hidden dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +32,6 @@
             </div>
 
             <div class="flex items-center">
-
                 @include('components.toogle-btn-darkmode')
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center">

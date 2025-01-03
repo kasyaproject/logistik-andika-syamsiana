@@ -14,9 +14,11 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    @notifyCss
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="font-sans antialiased">
@@ -35,9 +37,15 @@
         </div>
 
         @include('layouts.footer')
+
+
+        <div class="fixed z-50 top-4 end-4">
+            <x-notify::notify />
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    @notifyJs
 </body>
 
 </html>

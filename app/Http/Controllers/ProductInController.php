@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\activity_log;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ProductInController extends Controller
@@ -28,11 +29,18 @@ class ProductInController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'product_id' => 'required|numeric',
             'qty' => 'required|numeric',
             'origin' => 'required|string',
         ]);
+
+        if ($validator->fails()) {
+            // You can customize the error message display here
+            drakify('error', 'Failed to add new Product Income');
+
+            return redirect()->route('productIn.index')->withErrors($validator)->withInput();
+        }
 
         activity_log::create([
             'id' => (string) Str::uuid(),
@@ -41,6 +49,8 @@ class ProductInController extends Controller
             'origin' => $request->origin,
             'activity_type' => 'masuk',
         ]);
+
+        drakify('success', 'New Product Income has been added');
 
         return redirect()->route('productIn.index');
     }
@@ -67,12 +77,17 @@ class ProductInController extends Controller
             'quantity' => $request->qty,
             'origin' => $request->origin,
         ]);
+
+        smilify('success', 'Product Income has been updated');
+
         return redirect()->route('productIn.index');
     }
 
     public function destroy(activity_log $productIn)
     {
         activity_log::destroy($productIn->id);
+
+        smilify('success', 'Product Income has been deleted');
 
         return redirect()->route('productIn.index');
     }
